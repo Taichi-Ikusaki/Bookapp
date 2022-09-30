@@ -1,0 +1,879 @@
+  [1m[35m (1209.7ms)[0m  [1m[35mCREATE DATABASE "Bapp_development" ENCODING = 'unicode'[0m
+  [1m[35m (1186.9ms)[0m  [1m[35mCREATE DATABASE "Bapp_test" ENCODING = 'unicode'[0m
+Started GET "/" for ::1 at 2022-09-28 21:10:48 +0900
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/railties-7.0.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 12.5ms | Allocations: 692)
+Completed 200 OK in 87ms (Views: 30.1ms | ActiveRecord: 0.0ms | Allocations: 6792)
+
+
+  [1m[35m (76.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (18.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(396946255434909705)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20220928144826)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (21.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220928144826"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-09-28 14:48:46.487905"], ["updated_at", "2022-09-28 14:48:46.487905"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(396946255434909705)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2022-09-29 00:07:03 +0900
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 0.0ms | Allocations: 3474)
+
+
+  
+ArgumentError (Unknown validator: 'PresemceValidator'):
+  
+app/models/user.rb:4:in `<class:User>'
+app/models/user.rb:1:in `<main>'
+app/controllers/users_controller.rb:3:in `show'
+Started GET "/" for ::1 at 2022-09-29 00:07:30 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 7.6ms | Allocations: 1473)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | Allocations: 1541)
+Completed 500 Internal Server Error in 61ms (ActiveRecord: 13.7ms | Allocations: 4613)
+
+
+  
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    1: <h3><%= @user.name %>さんの図書</h3>
+  
+app/views/users/show.html.erb:1
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (2.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ikusaki@exe.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (5.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "いくさき"], ["email", "ikusaki@exe.com"], ["password_digest", "[FILTERED]"], ["created_at", "2022-09-28 15:12:31.527217"], ["updated_at", "2022-09-28 15:12:31.527217"]]
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (4.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/" for ::1 at 2022-09-29 00:14:00 +0900
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 2.5ms | Allocations: 329)
+  Rendered layout layouts/application.html.erb (Duration: 405.9ms | Allocations: 85970)
+Completed 500 Internal Server Error in 560ms (ActiveRecord: 12.4ms | Allocations: 108447)
+
+
+  
+ActionView::Template::Error (Permission denied @ rb_file_s_rename - (C:/Users/tiksk/Bapp/Bapp/tmp/cache/assets/sprockets/v4.0.0/6W/6WQP7FaMer6fHth2VtpYGIqBddyFZSIs10drpfBK16s.cache.22460.16516.653152, C:/Users/tiksk/Bapp/Bapp/tmp/cache/assets/sprockets/v4.0.0/6W/6WQP7FaMer6fHth2VtpYGIqBddyFZSIs10drpfBK16s.cache)):
+  
+sprockets (4.1.1) lib/sprockets/path_utils.rb:362:in `rename'
+sprockets (4.1.1) lib/sprockets/path_utils.rb:362:in `atomic_write'
+sprockets (4.1.1) lib/sprockets/cache/file_store.rb:112:in `set'
+sprockets (4.1.1) lib/sprockets/cache.rb:227:in `set'
+sprockets (4.1.1) lib/sprockets/cache.rb:143:in `set'
+sprockets (4.1.1) lib/sprockets/loader.rb:263:in `store_asset'
+sprockets (4.1.1) lib/sprockets/loader.rb:226:in `load_from_unloaded'
+sprockets (4.1.1) lib/sprockets/loader.rb:59:in `block in load'
+sprockets (4.1.1) lib/sprockets/loader.rb:337:in `fetch_asset_from_dependency_cache'
+sprockets (4.1.1) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.1.1) lib/sprockets/cached_environment.rb:44:in `block in load'
+sprockets (4.1.1) lib/sprockets/cached_environment.rb:44:in `fetch'
+sprockets (4.1.1) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.1.1) lib/sprockets/context.rb:117:in `load'
+sprockets (4.1.1) lib/sprockets/context.rb:145:in `depend_on_asset'
+sprockets (4.1.1) lib/sprockets/context.rb:185:in `link_asset'
+sprockets-rails (3.4.2) lib/sprockets/rails/context.rb:27:in `compute_asset_path'
+actionview (7.0.4) lib/action_view/helpers/asset_url_helper.rb:203:in `asset_path'
+sprockets-rails (3.4.2) lib/sprockets/rails/sourcemapping_url_processor.rb:41:in `sourcemap_asset_path'
+sprockets-rails (3.4.2) lib/sprockets/rails/sourcemapping_url_processor.rb:34:in `resolved_sourcemap_comment'
+sprockets-rails (3.4.2) lib/sprockets/rails/sourcemapping_url_processor.rb:15:in `block in call'
+sprockets-rails (3.4.2) lib/sprockets/rails/sourcemapping_url_processor.rb:11:in `gsub'
+sprockets-rails (3.4.2) lib/sprockets/rails/sourcemapping_url_processor.rb:11:in `call'
+sprockets (4.1.1) lib/sprockets/processor_utils.rb:84:in `call_processor'
+sprockets (4.1.1) lib/sprockets/processor_utils.rb:66:in `block in call_processors'
+sprockets (4.1.1) lib/sprockets/processor_utils.rb:65:in `reverse_each'
+sprockets (4.1.1) lib/sprockets/processor_utils.rb:65:in `call_processors'
+sprockets (4.1.1) lib/sprockets/loader.rb:182:in `load_from_unloaded'
+sprockets (4.1.1) lib/sprockets/loader.rb:59:in `block in load'
+sprockets (4.1.1) lib/sprockets/loader.rb:337:in `fetch_asset_from_dependency_cache'
+sprockets (4.1.1) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.1.1) lib/sprockets/cached_environment.rb:44:in `block in load'
+sprockets (4.1.1) lib/sprockets/cached_environment.rb:44:in `fetch'
+sprockets (4.1.1) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.1.1) lib/sprockets/bundle.rb:27:in `call'
+sprockets (4.1.1) lib/sprockets/processor_utils.rb:84:in `call_processor'
+sprockets (4.1.1) lib/sprockets/processor_utils.rb:66:in `block in call_processors'
+sprockets (4.1.1) lib/sprockets/processor_utils.rb:65:in `reverse_each'
+sprockets (4.1.1) lib/sprockets/processor_utils.rb:65:in `call_processors'
+sprockets (4.1.1) lib/sprockets/loader.rb:182:in `load_from_unloaded'
+sprockets (4.1.1) lib/sprockets/loader.rb:59:in `block in load'
+sprockets (4.1.1) lib/sprockets/loader.rb:337:in `fetch_asset_from_dependency_cache'
+sprockets (4.1.1) lib/sprockets/loader.rb:43:in `load'
+sprockets (4.1.1) lib/sprockets/cached_environment.rb:44:in `block in load'
+sprockets (4.1.1) lib/sprockets/cached_environment.rb:44:in `fetch'
+sprockets (4.1.1) lib/sprockets/cached_environment.rb:44:in `load'
+sprockets (4.1.1) lib/sprockets/base.rb:81:in `find_asset'
+sprockets (4.1.1) lib/sprockets/base.rb:88:in `find_all_linked_assets'
+sprockets (4.1.1) lib/sprockets/manifest.rb:125:in `each'
+sprockets (4.1.1) lib/sprockets/manifest.rb:125:in `to_a'
+sprockets (4.1.1) lib/sprockets/manifest.rb:125:in `block (2 levels) in find'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:47:in `block in synchronize'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:47:in `synchronize'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:47:in `synchronize'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/promise.rb:564:in `block in realize'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+concurrent-ruby (1.1.10) lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+Started GET "/" for 127.0.0.1 at 2022-09-30 03:35:42 +0900
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 5.8ms | Allocations: 329)
+  Rendered layout layouts/application.html.erb (Duration: 224.5ms | Allocations: 57193)
+Completed 200 OK in 391ms (Views: 240.3ms | ActiveRecord: 20.1ms | Allocations: 79697)
+
+
+Started GET "/" for 127.0.0.1 at 2022-09-30 03:35:46 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 14.9ms | Allocations: 2966)
+Completed 200 OK in 25ms (Views: 16.9ms | ActiveRecord: 0.5ms | Allocations: 3840)
+
+
+Started GET "/" for ::1 at 2022-09-30 03:35:52 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 19.5ms | Allocations: 2875)
+Completed 200 OK in 37ms (Views: 23.5ms | ActiveRecord: 0.5ms | Allocations: 3748)
+
+
+Started GET "/" for ::1 at 2022-09-30 04:07:25 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 1.8ms | Allocations: 124)
+  Rendered commons/_flash.html.erb (Duration: 1.4ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 77.9ms | Allocations: 19768)
+Completed 200 OK in 254ms (Views: 90.3ms | ActiveRecord: 17.2ms | Allocations: 26681)
+
+
+Started GET "/signup" for ::1 at 2022-09-30 04:07:27 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 9)
+  Rendered commons/_flash.html.erb (Duration: 0.2ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 15.2ms | Allocations: 3071)
+Completed 200 OK in 24ms (Views: 17.3ms | ActiveRecord: 0.3ms | Allocations: 3947)
+
+
+Started GET "/signup" for ::1 at 2022-09-30 04:07:29 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 9)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 11.6ms | Allocations: 3053)
+Completed 200 OK in 18ms (Views: 12.8ms | ActiveRecord: 0.4ms | Allocations: 3910)
+
+
+Started GET "/signup" for ::1 at 2022-09-30 04:07:30 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 9)
+  Rendered commons/_flash.html.erb (Duration: 0.0ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 9.6ms | Allocations: 3067)
+Completed 200 OK in 17ms (Views: 11.3ms | ActiveRecord: 0.3ms | Allocations: 3924)
+
+
+Started GET "/signup" for ::1 at 2022-09-30 08:52:14 +0900
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+Redirected to http://[::1]:3000/login
+Completed 302 Found in 38ms (ActiveRecord: 6.6ms | Allocations: 5535)
+
+
+Started GET "/login" for ::1 at 2022-09-30 08:52:15 +0900
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 38.3ms | Allocations: 1553)
+  Rendered commons/_flash.html.erb (Duration: 1.2ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 244.1ms | Allocations: 55539)
+Completed 200 OK in 273ms (Views: 260.3ms | ActiveRecord: 0.0ms | Allocations: 58126)
+
+
+Started GET "/signup" for ::1 at 2022-09-30 08:52:25 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+Redirected to http://[::1]:3000/login
+Completed 302 Found in 7ms (ActiveRecord: 0.5ms | Allocations: 880)
+
+
+Started GET "/login" for ::1 at 2022-09-30 08:52:25 +0900
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 514)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 11.6ms | Allocations: 3493)
+Completed 200 OK in 16ms (Views: 13.1ms | ActiveRecord: 0.0ms | Allocations: 3758)
+
+
+Started GET "/login" for ::1 at 2022-09-30 08:52:27 +0900
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.3ms | Allocations: 503)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 13.5ms | Allocations: 3473)
+Completed 200 OK in 17ms (Views: 14.8ms | ActiveRecord: 0.0ms | Allocations: 3741)
+
+
+Started GET "/login" for ::1 at 2022-09-30 08:53:52 +0900
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 3.5ms | Allocations: 695)
+  Rendered commons/_flash.html.erb (Duration: 2.6ms | Allocations: 167)
+  Rendered layout layouts/application.html.erb (Duration: 23.7ms | Allocations: 4217)
+Completed 200 OK in 45ms (Views: 41.0ms | ActiveRecord: 0.0ms | Allocations: 5127)
+
+
+Started GET "/login" for ::1 at 2022-09-30 08:53:56 +0900
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 504)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 11.6ms | Allocations: 3515)
+Completed 200 OK in 17ms (Views: 13.2ms | ActiveRecord: 0.0ms | Allocations: 3779)
+
+
+Started GET "/login" for ::1 at 2022-09-30 08:54:09 +0900
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.8ms | Allocations: 513)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 14.2ms | Allocations: 3509)
+Completed 200 OK in 19ms (Views: 15.7ms | ActiveRecord: 0.0ms | Allocations: 3771)
+
+
+Started GET "/" for ::1 at 2022-09-30 08:54:12 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+Redirected to http://[::1]:3000/login
+Completed 302 Found in 8ms (ActiveRecord: 0.4ms | Allocations: 883)
+
+
+Started GET "/login" for ::1 at 2022-09-30 08:54:12 +0900
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 503)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 9.8ms | Allocations: 3493)
+Completed 200 OK in 13ms (Views: 11.0ms | ActiveRecord: 0.0ms | Allocations: 3757)
+
+
+Started GET "/" for ::1 at 2022-09-30 08:54:13 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+Redirected to http://[::1]:3000/login
+Completed 302 Found in 7ms (ActiveRecord: 0.6ms | Allocations: 880)
+
+
+Started GET "/login" for ::1 at 2022-09-30 08:54:14 +0900
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.5ms | Allocations: 501)
+  Rendered commons/_flash.html.erb (Duration: 0.0ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 3494)
+Completed 200 OK in 15ms (Views: 12.3ms | ActiveRecord: 0.0ms | Allocations: 3766)
+
+
+Started POST "/login" for ::1 at 2022-09-30 08:54:39 +0900
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "session"=>{"email"=>"ikusaki@exe.com", "password"=>"[FILTERED]"}, "commit"=>"ログイン"}
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.0ms | Allocations: 3254)
+
+
+  
+NameError (undefined local variable or method `email' for #<SessionsController:0x0000000000bb30>
+Did you mean?  emial):
+  
+app/controllers/sessions_controller.rb:25:in `login'
+app/controllers/sessions_controller.rb:8:in `create'
+Started GET "/login" for ::1 at 2022-09-30 08:55:48 +0900
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.8ms | Allocations: 507)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 42.8ms | Allocations: 17779)
+Completed 200 OK in 49ms (Views: 46.1ms | ActiveRecord: 0.0ms | Allocations: 18426)
+
+
+Started POST "/login" for ::1 at 2022-09-30 08:55:59 +0900
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "session"=>{"email"=>"ikusaki@exe.com", "password"=>"[FILTERED]"}, "commit"=>"ログイン"}
+  [1m[36mUser Load (5.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ikusaki@exe.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:25:in `login'
+Redirected to http://[::1]:3000/
+Completed 302 Found in 311ms (ActiveRecord: 20.6ms | Allocations: 17592)
+
+
+Started GET "/" for ::1 at 2022-09-30 08:56:00 +0900
+Processing by UsersController#show as TURBO_STREAM
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:3:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 1.2ms | Allocations: 121)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 24)
+  Rendered layout layouts/application.html.erb (Duration: 11.9ms | Allocations: 3193)
+Completed 200 OK in 32ms (Views: 18.1ms | ActiveRecord: 1.6ms | Allocations: 5164)
+
+
+Started GET "/" for ::1 at 2022-09-30 09:11:00 +0900
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NameError (undefined local variable or method `show' for UsersController:Class):
+  
+app/controllers/users_controller.rb:2:in `<class:UsersController>'
+app/controllers/users_controller.rb:1:in `<main>'
+Started GET "/" for ::1 at 2022-09-30 09:11:53 +0900
+Processing by UsersController#show as HTML
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.0ms | Allocations: 5963)
+
+
+  
+NameError (undefined local variable or method `user_id' for #<UsersController:0x0000000000f898>):
+  
+app/helpers/sessions_helper.rb:6:in `current_user'
+app/helpers/sessions_helper.rb:11:in `logged_in?'
+app/controllers/application_controller.rb:4:in `require_logged_in'
+Started GET "/" for ::1 at 2022-09-30 09:15:03 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 1.2ms | Allocations: 125)
+  Rendered commons/_flash.html.erb (Duration: 0.9ms | Allocations: 172)
+  Rendered layout layouts/application.html.erb (Duration: 114.6ms | Allocations: 48200)
+Completed 200 OK in 238ms (Views: 125.7ms | ActiveRecord: 11.5ms | Allocations: 68264)
+
+
+  [1m[35m (5.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(396946255434909705)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateBooks (20220930001550)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(396946255434909705)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(396946255434909705)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateBooks (20220930001550)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (68.4ms)[0m  [1m[35mCREATE TABLE "books" ("id" bigserial primary key, "user_id" bigint NOT NULL, "title" character varying(100) NOT NULL, "author" character varying(100), "publisher" character varying(100), "review" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_bc582ddd02"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE INDEX "index_books_on_user_id" ON "books" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (6.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220930001550"]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(396946255434909705)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2022-09-30 14:14:53 +0900
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 27.6ms | Allocations: 5218)
+  Rendered layout layouts/application.html.erb (Duration: 29.1ms | Allocations: 5292)
+Completed 500 Internal Server Error in 243ms (ActiveRecord: 10.9ms | Allocations: 40221)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `new_book_path' for #<ActionView::Base:0x0000000000b810>
+Did you mean?  books_new_path):
+    1: <h3><%= @user.name %>さんの図書</h3>
+    2: <%= link_to '新規登録', new_book_path %>
+    3: <%= render 'commons/books '%>
+  
+app/views/users/show.html.erb:2
+Started GET "/" for ::1 at 2022-09-30 14:18:20 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 33.8ms | Allocations: 2023)
+  Rendered layout layouts/application.html.erb (Duration: 39.5ms | Allocations: 2091)
+Completed 500 Internal Server Error in 97ms (ActiveRecord: 7.7ms | Allocations: 10336)
+
+
+  
+ActionView::Template::Error (Missing partial commons/_books  with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:raw, :erb, :html, :builder, :ruby, :jbuilder]}.
+
+Searched in:
+  * "C:/Users/tiksk/Bapp/Bapp/app/views"
+  * "C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/actiontext-7.0.4/app/views"
+  * "C:/Ruby27-x64/lib/ruby/gems/2.7.0/gems/actionmailbox-7.0.4/app/views"
+
+Did you mean?  commons/books
+               commons/flash
+               books/form
+               active_storage/blobs/blob
+               action_text/contents/content
+               layouts/action_text/contents/content):
+    1: <h3><%= @user.name %>さんの図書</h3>
+    2: <%= link_to '新規登録', new_book_path %>
+    3: <%= render 'commons/books '%>
+  
+app/views/users/show.html.erb:3
+Started GET "/" for ::1 at 2022-09-30 14:21:16 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mBook Load (7.3ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 13.0ms | Allocations: 825)
+  Rendered users/show.html.erb within layouts/application (Duration: 16.0ms | Allocations: 1117)
+  Rendered commons/_flash.html.erb (Duration: 1.2ms | Allocations: 170)
+  Rendered layout layouts/application.html.erb (Duration: 189.9ms | Allocations: 49185)
+Completed 200 OK in 212ms (Views: 192.6ms | ActiveRecord: 7.7ms | Allocations: 51305)
+
+
+Started GET "/books/new" for ::1 at 2022-09-30 14:21:31 +0900
+  
+NameError (undefined local variable or method `only' for BooksController:Class):
+  
+app/controllers/books_controller.rb:3:in `<class:BooksController>'
+app/controllers/books_controller.rb:1:in `<main>'
+Started GET "/books/new" for ::1 at 2022-09-30 14:23:19 +0900
+Processing by BooksController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/_form.html.erb (Duration: 17.2ms | Allocations: 834)
+  Rendered books/new.html.erb within layouts/application (Duration: 23.7ms | Allocations: 1437)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 96.8ms | Allocations: 18690)
+Completed 200 OK in 190ms (Views: 102.0ms | ActiveRecord: 10.2ms | Allocations: 40045)
+
+
+Started GET "/books/new" for ::1 at 2022-09-30 14:29:43 +0900
+Processing by BooksController#new as HTML
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/_form.html.erb (Duration: 0.4ms | Allocations: 257)
+  Rendered books/new.html.erb within layouts/application (Duration: 1.9ms | Allocations: 589)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 141.1ms | Allocations: 7490)
+Completed 200 OK in 276ms (Views: 142.7ms | ActiveRecord: 18.3ms | Allocations: 11474)
+
+
+Started GET "/books" for ::1 at 2022-09-30 14:29:51 +0900
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (2.2ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 5.0ms | Allocations: 579)
+  Rendered books/index.html.erb within layouts/application (Duration: 6.7ms | Allocations: 744)
+  Rendered commons/_flash.html.erb (Duration: 0.0ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 16.3ms | Allocations: 3738)
+Completed 200 OK in 25ms (Views: 15.9ms | ActiveRecord: 2.6ms | Allocations: 4731)
+
+
+Started GET "/" for ::1 at 2022-09-30 14:30:01 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 3.8ms | Allocations: 567)
+  Rendered users/show.html.erb within layouts/application (Duration: 5.1ms | Allocations: 672)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 18.7ms | Allocations: 3652)
+Completed 200 OK in 36ms (Views: 22.1ms | ActiveRecord: 1.4ms | Allocations: 6107)
+
+
+Started GET "/books/new" for ::1 at 2022-09-30 14:30:02 +0900
+Processing by BooksController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/_form.html.erb (Duration: 0.3ms | Allocations: 257)
+  Rendered books/new.html.erb within layouts/application (Duration: 1.4ms | Allocations: 589)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 10.2ms | Allocations: 3554)
+Completed 200 OK in 18ms (Views: 11.7ms | ActiveRecord: 0.4ms | Allocations: 4488)
+
+
+Started GET "/books/new" for ::1 at 2022-09-30 14:31:15 +0900
+Processing by BooksController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/_form.html.erb (Duration: 1.7ms | Allocations: 426)
+  Rendered books/new.html.erb within layouts/application (Duration: 6.1ms | Allocations: 1003)
+  Rendered commons/_flash.html.erb (Duration: 1.0ms | Allocations: 165)
+  Rendered layout layouts/application.html.erb (Duration: 23.0ms | Allocations: 4544)
+Completed 200 OK in 45ms (Views: 34.3ms | ActiveRecord: 0.5ms | Allocations: 6110)
+
+
+Started POST "/books" for ::1 at 2022-09-30 14:31:50 +0900
+Processing by BooksController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "book"=>{"title"=>"ONEPIECE", "author"=>"尾田栄一郎", "publisher"=>"講談社", "review"=>""}, "commit"=>"登録する"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/books_controller.rb:18:in `create'
+  [1m[36mBook Create (17.6ms)[0m  [1m[32mINSERT INTO "books" ("user_id", "title", "author", "publisher", "review", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 1], ["title", "ONEPIECE"], ["author", "尾田栄一郎"], ["publisher", "講談社"], ["review", ""], ["created_at", "2022-09-30 05:31:51.044624"], ["updated_at", "2022-09-30 05:31:51.044624"]]
+  ↳ app/controllers/books_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/books_controller.rb:18:in `create'
+Redirected to http://[::1]:3000/books/1
+Completed 302 Found in 51ms (ActiveRecord: 20.8ms | Allocations: 4925)
+
+
+Started GET "/books/1" for ::1 at 2022-09-30 14:31:51 +0900
+Processing by BooksController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:51:in `set_book'
+  Rendering layout layouts/application.html.erb
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/books/show.html.erb:4
+  Rendered books/show.html.erb within layouts/application (Duration: 12.0ms | Allocations: 4812)
+  Rendered layout layouts/application.html.erb (Duration: 13.4ms | Allocations: 4879)
+Completed 500 Internal Server Error in 36ms (ActiveRecord: 0.8ms | Allocations: 6925)
+
+
+  
+ActionView::Template::Error (undefined method `auhtor' for #<Book:0x00000168acef2138>
+Did you mean?  author):
+     5:     <dt>タイトル</dt>
+     6:     <dd><%= @book.title %></dd>
+     7:     <dt>著者</dt>
+     8:     <dd><%= @book.auhtor %></dd>
+     9:     <dt>出版社</dt>
+    10:     <dd><%= @book.publisher %></dd>
+    11:     <dt>感想</dt>
+  
+app/views/books/show.html.erb:8
+Started GET "/books/new" for ::1 at 2022-09-30 14:32:38 +0900
+Processing by BooksController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/_form.html.erb (Duration: 2.1ms | Allocations: 427)
+  Rendered books/new.html.erb within layouts/application (Duration: 6.1ms | Allocations: 1004)
+  Rendered commons/_flash.html.erb (Duration: 1.4ms | Allocations: 167)
+  Rendered layout layouts/application.html.erb (Duration: 22.1ms | Allocations: 4559)
+Completed 200 OK in 40ms (Views: 32.7ms | ActiveRecord: 0.3ms | Allocations: 6141)
+
+
+Started GET "/books" for ::1 at 2022-09-30 14:32:43 +0900
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 5.8ms | Allocations: 908)
+  Rendered books/index.html.erb within layouts/application (Duration: 9.7ms | Allocations: 1128)
+  Rendered commons/_flash.html.erb (Duration: 0.2ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 24.7ms | Allocations: 4115)
+Completed 200 OK in 34ms (Views: 25.9ms | ActiveRecord: 0.8ms | Allocations: 5098)
+
+
+Started GET "/books" for ::1 at 2022-09-30 14:34:00 +0900
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 4.0ms | Allocations: 690)
+  Rendered books/index.html.erb within layouts/application (Duration: 5.1ms | Allocations: 749)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 17.5ms | Allocations: 3712)
+Completed 200 OK in 26ms (Views: 18.5ms | ActiveRecord: 0.9ms | Allocations: 4638)
+
+
+Started GET "/books/1" for ::1 at 2022-09-30 14:34:03 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:51:in `set_book'
+  Rendering layout layouts/application.html.erb
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/books/show.html.erb:4
+  Rendered books/show.html.erb within layouts/application (Duration: 10.4ms | Allocations: 941)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 48.8ms | Allocations: 3911)
+Completed 200 OK in 70ms (Views: 58.9ms | ActiveRecord: 1.2ms | Allocations: 5362)
+
+
+Started GET "/books" for ::1 at 2022-09-30 14:34:08 +0900
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 3.9ms | Allocations: 690)
+  Rendered books/index.html.erb within layouts/application (Duration: 4.7ms | Allocations: 749)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 16.6ms | Allocations: 3712)
+Completed 200 OK in 25ms (Views: 18.6ms | ActiveRecord: 1.0ms | Allocations: 4646)
+
+
+Started GET "/books" for ::1 at 2022-09-30 14:36:06 +0900
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 5.0ms | Allocations: 833)
+  Rendered books/index.html.erb within layouts/application (Duration: 9.5ms | Allocations: 1052)
+  Rendered commons/_flash.html.erb (Duration: 1.0ms | Allocations: 165)
+  Rendered layout layouts/application.html.erb (Duration: 24.1ms | Allocations: 4593)
+Completed 200 OK in 41ms (Views: 31.0ms | ActiveRecord: 0.9ms | Allocations: 6157)
+
+
+Started GET "/books" for ::1 at 2022-09-30 14:37:21 +0900
+Processing by BooksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/index.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books"[0m
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 3.2ms | Allocations: 623)
+  Rendered books/index.html.erb within layouts/application (Duration: 3.9ms | Allocations: 682)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 17.3ms | Allocations: 3660)
+Completed 200 OK in 25ms (Views: 18.5ms | ActiveRecord: 0.8ms | Allocations: 4598)
+
+
+Started GET "/" for ::1 at 2022-09-30 14:37:23 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 4.6ms | Allocations: 638)
+  Rendered users/show.html.erb within layouts/application (Duration: 6.7ms | Allocations: 876)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 18.8ms | Allocations: 3854)
+Completed 200 OK in 37ms (Views: 25.4ms | ActiveRecord: 1.0ms | Allocations: 5796)
+
+
+Started GET "/books/new" for ::1 at 2022-09-30 14:37:25 +0900
+Processing by BooksController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering books/new.html.erb within layouts/application
+  Rendered books/_form.html.erb (Duration: 1.4ms | Allocations: 426)
+  Rendered books/new.html.erb within layouts/application (Duration: 5.8ms | Allocations: 1003)
+  Rendered commons/_flash.html.erb (Duration: 0.0ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 15.7ms | Allocations: 3977)
+Completed 200 OK in 26ms (Views: 17.8ms | ActiveRecord: 0.3ms | Allocations: 4967)
+
+
+Started POST "/books" for ::1 at 2022-09-30 14:37:51 +0900
+Processing by BooksController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "book"=>{"title"=>"ONEPIECE2巻", "author"=>"尾田栄一郎", "publisher"=>"講談社", "review"=>"ルフィ応援しよ"}, "commit"=>"登録する"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/books_controller.rb:18:in `create'
+  [1m[36mBook Create (0.7ms)[0m  [1m[32mINSERT INTO "books" ("user_id", "title", "author", "publisher", "review", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["user_id", 1], ["title", "ONEPIECE2巻"], ["author", "尾田栄一郎"], ["publisher", "講談社"], ["review", "ルフィ応援しよ"], ["created_at", "2022-09-30 05:37:51.422045"], ["updated_at", "2022-09-30 05:37:51.422045"]]
+  ↳ app/controllers/books_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/books_controller.rb:18:in `create'
+Redirected to http://[::1]:3000/books/2
+Completed 302 Found in 21ms (ActiveRecord: 5.5ms | Allocations: 2818)
+
+
+Started GET "/books/2" for ::1 at 2022-09-30 14:37:51 +0900
+Processing by BooksController#show as TURBO_STREAM
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mBook Load (0.4ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:51:in `set_book'
+  Rendering layout layouts/application.html.erb
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/books/show.html.erb:4
+  Rendered books/show.html.erb within layouts/application (Duration: 5.2ms | Allocations: 933)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 23)
+  Rendered layout layouts/application.html.erb (Duration: 16.9ms | Allocations: 3956)
+Completed 200 OK in 28ms (Views: 18.7ms | ActiveRecord: 0.8ms | Allocations: 5472)
+
+
+Started GET "/" for ::1 at 2022-09-30 14:37:55 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mBook Load (0.7ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 4.7ms | Allocations: 711)
+  Rendered users/show.html.erb within layouts/application (Duration: 7.7ms | Allocations: 814)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 17.1ms | Allocations: 3793)
+Completed 200 OK in 28ms (Views: 18.4ms | ActiveRecord: 1.0ms | Allocations: 5247)
+
+
+Started GET "/books/2" for ::1 at 2022-09-30 14:37:58 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:51:in `set_book'
+  Rendering layout layouts/application.html.erb
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/books/show.html.erb:4
+  Rendered books/show.html.erb within layouts/application (Duration: 2.8ms | Allocations: 691)
+  Rendered commons/_flash.html.erb (Duration: 0.0ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 13.6ms | Allocations: 3647)
+Completed 200 OK in 24ms (Views: 15.4ms | ActiveRecord: 0.8ms | Allocations: 5053)
+
+
+Started GET "/" for ::1 at 2022-09-30 14:38:00 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 3.4ms | Allocations: 710)
+  Rendered users/show.html.erb within layouts/application (Duration: 4.2ms | Allocations: 808)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 13.2ms | Allocations: 3772)
+Completed 200 OK in 23ms (Views: 14.2ms | ActiveRecord: 0.8ms | Allocations: 5236)
+
+
+Started GET "/books/2" for ::1 at 2022-09-30 14:38:06 +0900
+Processing by BooksController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mBook Load (0.5ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/books_controller.rb:51:in `set_book'
+  Rendering layout layouts/application.html.erb
+  Rendering books/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/books/show.html.erb:4
+  Rendered books/show.html.erb within layouts/application (Duration: 2.8ms | Allocations: 691)
+  Rendered commons/_flash.html.erb (Duration: 0.1ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 12.9ms | Allocations: 3656)
+Completed 200 OK in 22ms (Views: 14.5ms | ActiveRecord: 0.8ms | Allocations: 5064)
+
+
+Started GET "/" for ::1 at 2022-09-30 14:38:08 +0900
+Processing by UsersController#show as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/sessions_helper.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:4:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mBook Load (0.6ms)[0m  [1m[34mSELECT "books".* FROM "books" WHERE "books"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/commons/_books.html.erb:5
+  Rendered commons/_books.html.erb (Duration: 3.5ms | Allocations: 710)
+  Rendered users/show.html.erb within layouts/application (Duration: 4.4ms | Allocations: 808)
+  Rendered commons/_flash.html.erb (Duration: 0.6ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 18.8ms | Allocations: 3772)
+Completed 200 OK in 30ms (Views: 19.7ms | ActiveRecord: 0.9ms | Allocations: 5236)
+
+
