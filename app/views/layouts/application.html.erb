@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bapp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <p>
+    <% if logged_in? %>
+      <%= link_to 'HOME', root_path %>
+      <%= link_to '登録本一覧', books_path %>
+      <%= link_to 'ログアウト', logout_path, method: :delete %>
+    <% else %>
+      <%= link_to '会員登録', signup_path %>
+      <%= link_to 'ログイン', login_path %>
+    <% end %>
+    </p>
+    <%=render 'commons/flash' %>
+    <%= yield %>
+  </body>
+</html>
